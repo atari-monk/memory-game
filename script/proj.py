@@ -32,7 +32,7 @@ def create_game_structure(game_name):
 
     # Create default files
     files = {
-        os.path.join(base_dir, "index.html"): "<!DOCTYPE html>\n<html>\n<head>\n    <title>Mini Game</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n    <h1>Welcome to the Mini Game</h1>\n    <script src=\"script.js\"></script>\n</body>\n</html>",
+        os.path.join(base_dir, "index.html"): "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>Mini Game</title>\n    <link rel=\"stylesheet\" href=\"styles.css\" />\n  </head>\n  <body>\n    <h1>Welcome to the Mini Game</h1>\n    <script src=\"script.js\"></script>\n  </body>\n</html>\n",
 
         os.path.join(base_dir, "styles.css"): "/* Add your styles here */\nbody {\n    font-family: Arial, sans-serif;\n    margin: 0;\n    padding: 0;\n    text-align: center;\n}",
 
