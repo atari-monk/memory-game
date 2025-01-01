@@ -1,0 +1,27 @@
+.fullscreen-button {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #ff0000;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  border: 5px solid #000000;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fullscreen-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+.fullscreen-button:focus {
+  outline: none;
+}
