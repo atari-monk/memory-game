@@ -23,40 +23,36 @@ function createGrid(rows, cols, pairs) {
 let counter = 0
 
 function cardClickHandler(card, content) {
-  // Prevent clicks while the board is locked, card is already flipped, or if it's the same card as the first one
   if (lockBoard || content.classList.contains('show') || card === firstCard)
     return
 
   counter++
   console.log(`Click counter: ${counter}`)
 
-  content.classList.add('show') // Show the content of the card
+  content.classList.add('show')
 
   if (!firstCard) {
-    firstCard = card // First card selected
+    firstCard = card
     return
   }
 
-  secondCard = card // Second card selected
-  lockBoard = true // Lock the board to prevent more clicks
+  secondCard = card
+  lockBoard = true
 
-  // Check if the two cards match
   const firstContent = firstCard.querySelector('.card-content').innerText
   const secondContent = secondCard.querySelector('.card-content').innerText
 
   if (firstContent === secondContent) {
-    // If they match, keep them revealed
     setTimeout(() => {
-      firstCard.removeEventListener('click', cardClickHandler) // Disable further clicks on the matched card
+      firstCard.removeEventListener('click', cardClickHandler)
       secondCard.removeEventListener('click', cardClickHandler)
-      resetBoard() // Reset for next pair
+      resetBoard()
     }, 500)
   } else {
-    // If they don't match, hide their content after 2 seconds
     setTimeout(() => {
       firstCard.querySelector('.card-content').classList.remove('show')
       secondCard.querySelector('.card-content').classList.remove('show')
-      resetBoard() // Reset for next pair
+      resetBoard()
     }, 2000)
   }
 }
@@ -70,29 +66,25 @@ function resetBoard() {
 function generatePairs(rows, cols) {
   const totalCards = rows * cols
 
-  // Throw an error if the total number of cards is odd (cannot form pairs)
   if (totalCards % 2 !== 0) {
     throw new Error('The total number of cards must be even to form pairs.')
   }
 
-  // Step 1: Create the array of pairs (1,1), (2,2), ..., (n,n)
   let numbers = []
   for (let i = 1; i <= totalCards / 2; i++) {
-    numbers.push(i, i) // Add each number twice
+    numbers.push(i, i)
   }
 
-  // Step 2: Shuffle the array randomly
   for (let i = numbers.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[numbers[i], numbers[j]] = [numbers[j], numbers[i]] // Swap elements
+    ;[numbers[i], numbers[j]] = [numbers[j], numbers[i]]
   }
 
-  // Return the shuffled array with pairs
   return numbers
 }
 
-const row = 2
-const column = 4
+const row = 4
+const column = 6
 
 let pairs
 

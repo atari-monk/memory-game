@@ -10,20 +10,19 @@ body {
   width: 100%;
 }
 
-/* Grid container */
 .grid-container {
   display: grid;
-  grid-gap: 10px; /* Space between cards */
+  grid-gap: 10px;
   height: 100vh;
   width: 100vw;
   padding: 0;
-  overflow: hidden; /* Ensure no overflow from the grid */
-  justify-items: stretch; /* Stretch cards to fill available space */
-  align-items: stretch; /* Stretch cards to fill available space */
+  overflow: hidden;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 .card {
-  background-color: #3498db;
+  background-color: #29ba21;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -32,18 +31,13 @@ body {
   color: white;
   font-size: 20px;
   font-weight: bold;
-  transition: transform 0.3s ease-in-out;
-  z-index: 1; /* Default z-index for cards */
-}
-
-.card:hover {
-  transform: scale(1.05);
+  z-index: 1;
 }
 
 .card-content {
   display: none;
   color: #fff;
-  font-size: 16px;
+  font-size: 8vw;
   text-align: center;
 }
 
