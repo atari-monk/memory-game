@@ -14,12 +14,57 @@ function createGrid(rows, cols, pairs) {
     content.innerText = pairs[i]
     card.appendChild(content)
 
-    card.addEventListener('click', () => {
-      content.classList.toggle('show')
-    })
+    card.addEventListener('click', () => cardClickHandler(card, content))
 
     gridContainer.appendChild(card)
   }
+}
+
+let counter = 0
+
+function cardClickHandler(card, content) {
+  // Prevent clicks while the board is locked, card is already flipped, or if it's the same card as the first one
+  if (lockBoard || content.classList.contains('show') || card === firstCard)
+    return
+
+  counter++
+  console.log(`Click counter: ${counter}`)
+
+  content.classList.add('show') // Show the content of the card
+
+  if (!firstCard) {
+    firstCard = card // First card selected
+    return
+  }
+
+  secondCard = card // Second card selected
+  lockBoard = true // Lock the board to prevent more clicks
+
+  // Check if the two cards match
+  const firstContent = firstCard.querySelector('.card-content').innerText
+  const secondContent = secondCard.querySelector('.card-content').innerText
+
+  if (firstContent === secondContent) {
+    // If they match, keep them revealed
+    setTimeout(() => {
+      firstCard.removeEventListener('click', cardClickHandler) // Disable further clicks on the matched card
+      secondCard.removeEventListener('click', cardClickHandler)
+      resetBoard() // Reset for next pair
+    }, 500)
+  } else {
+    // If they don't match, hide their content after 2 seconds
+    setTimeout(() => {
+      firstCard.querySelector('.card-content').classList.remove('show')
+      secondCard.querySelector('.card-content').classList.remove('show')
+      resetBoard() // Reset for next pair
+    }, 2000)
+  }
+}
+
+function resetBoard() {
+  firstCard = null
+  secondCard = null
+  lockBoard = false
 }
 
 function generatePairs(rows, cols) {
@@ -46,10 +91,14 @@ function generatePairs(rows, cols) {
   return numbers
 }
 
-const row = 4
-const column = 13
+const row = 2
+const column = 4
 
 let pairs
+
+let firstCard = null
+let secondCard = null
+let lockBoard = false
 
 try {
   pairs = generatePairs(row, column)
