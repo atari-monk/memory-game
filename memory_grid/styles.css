@@ -39,6 +39,9 @@ body {
   color: #fff;
   font-size: 8vw;
   text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .card .show {
