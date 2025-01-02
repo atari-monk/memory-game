@@ -111,8 +111,8 @@ function generatePairs(rows, cols) {
   return numbers
 }
 
-const row = 2
-const column = 2
+const row = 4
+const column = 6
 
 let pairs
 
