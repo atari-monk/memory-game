@@ -1,3 +1,9 @@
+function setGridLayout(rows, cols) {
+  const gridContainer = document.getElementById('grid-container')
+  gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`
+  gridContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`
+}
+
 function createGrid(rows, cols, pairs) {
   const gridContainer = document.getElementById('grid-container')
   gridContainer.innerHTML = ''
@@ -18,6 +24,12 @@ function createGrid(rows, cols, pairs) {
 
     gridContainer.appendChild(card)
   }
+
+  setGridLayout(rows, cols)
+}
+
+function updateGridLayout(rows, cols) {
+  setGridLayout(rows, cols)
 }
 
 function cardClickHandler(card, content) {
@@ -120,5 +132,5 @@ try {
 createGrid(row, column, pairs)
 
 window.addEventListener('resize', () => {
-  createGrid(row, column, pairs)
+  updateGridLayout(row, column)
 })
