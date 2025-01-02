@@ -1,16 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.getElementById('overlay')
+  window.openOverlay = openOverlay
+})
 
-  window.openOverlay = (message) => {
-    const messageElement = document.getElementById('overlayMessage')
-    messageElement.textContent = message || 'This is a default message.'
-    overlay.style.display = 'flex'
+function openOverlay(message, onCloseCallback) {
+  const overlay = document.getElementById('overlay')
+  const messageElement = document.getElementById('overlayMessage')
+
+  messageElement.textContent = message || 'This is a default message.'
+  overlay.style.display = 'flex'
+
+  const closeHandler = (event) => {
+    if (event.target.id === 'closeOverlay') {
+      overlay.style.display = 'none'
+      overlay.removeEventListener('click', closeHandler)
+      if (onCloseCallback) {
+        onCloseCallback()
+      }
+    }
   }
 
-  const closeOverlayButton = document.getElementById('closeOverlay')
-  closeOverlayButton.addEventListener('click', () => {
-    overlay.style.display = 'none'
-  })
-
-  openOverlay('Hello! This is your custom message.')
-})
+  overlay.addEventListener('click', closeHandler)
+}

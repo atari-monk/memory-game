@@ -20,8 +20,6 @@ function createGrid(rows, cols, pairs) {
   }
 }
 
-let counter = 0
-
 function cardClickHandler(card, content) {
   if (lockBoard || content.classList.contains('show') || card === firstCard)
     return
@@ -47,6 +45,11 @@ function cardClickHandler(card, content) {
       firstCard.removeEventListener('click', cardClickHandler)
       secondCard.removeEventListener('click', cardClickHandler)
       resetBoard()
+
+      remainingPairs--
+      if (remainingPairs === 0) {
+        gameOverHandler()
+      }
     }, 500)
   } else {
     setTimeout(() => {
@@ -61,6 +64,19 @@ function resetBoard() {
   firstCard = null
   secondCard = null
   lockBoard = false
+}
+
+function gameOverHandler() {
+  openOverlay(`You completed the game in ${counter} moves!`, () => {
+    restartGame()
+  })
+}
+
+function restartGame() {
+  counter = 0
+  remainingPairs = (row * column) / 2
+  pairs = generatePairs(row, column)
+  createGrid(row, column, pairs)
 }
 
 function generatePairs(rows, cols) {
@@ -91,6 +107,8 @@ let pairs
 let firstCard = null
 let secondCard = null
 let lockBoard = false
+let remainingPairs = (row * column) / 2
+let counter = 0
 
 try {
   pairs = generatePairs(row, column)
